@@ -1,0 +1,23 @@
+Step 1 : Setup a linux machine
+
+Step-2 : Go to your jenkins master and add credentials for slave(we will use ssh method so chose "SSH Username with private key" as kind and fill required details. In private key section enter ppk file's complete content{refer credentials-config.png})
+
+Step-3 : Go to "Manage Jenkins->Manage Nodes and Clouds->New Node" and Enter Node name and Select Permanent Agent and click Ok(refer node-creation-1.png)
+
+Step-4: Fill require details(refer node-creation-2.png):
+		> # of executors --> it is used to for maximum number of concurrent builds that Jenkins may perform on this node
+		> Remote root directory --> Make sure this directory exists on slave node and have proper permissions (Jenkins will use this dir for workspace and other configs)
+		> Labels --> Enter a label, this label will be used to run any job on this slave
+		> Launch method --> We will use "Launch agents via SSH"
+			> Host --> Enter slave node's IP either private or public (If Matser and slave node both are in same VPC then Private IP shold be preferred)
+			> Credentials --> Chose credentials we have setup in Step-2
+			> Host Key Verification Strategy --> Manually provided key Verification Strategy, after selecting this step it will ask for SSH key (it is an ecdsa server figerprint key)
+				(When you connect to a server via SSH, it gets a fingerprint for the ECDSA key, which it then saves to your home directory under ~/.ssh/known_hosts . ... If you enter 'yes', then the fingerprint is saved to the known_hosts file, which SSH then consults every time you connect to that server.)
+				We can also chose Non verifying Verification Strategy(Less secure) 
+			> To get this ssh into slave node from any linux machine , while first time login we will get this (ssh -i location/to/pem/file user@IP)
+Step-5: Save and launch agents
+
+Common Errors and resolution:
+
+1. Java version mismatched 
+Sol: Install same java version on both master and slave. If having two different version of java in slave use "alternatives --config java" command select required version			

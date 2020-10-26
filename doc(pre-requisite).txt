@@ -1,0 +1,23 @@
+####Linux Slave Node
+
+	*Plugins Required*
+		SSH build agents
+		SSH Agent
+	- Launch Agents Via SSH
+
+		First time when master connect to slave node it searches for slave Program on the slave node. There should be ssh conectivity between master and slave nodes
+
+		We can manually download the slave.jar program on the slave node and start the program.
+		 OR
+		Master can download the agent on the slave node and start the agent program on the slave node.
+
+		a. Host
+			IP of the worker node
+
+		b. Configure SSH credentials of the worker node.
+
+		c. Host Key Verification Strategy
+			Non Verifying Verification Strategy
+			
+
+Note : Both master and slave should have same java version
